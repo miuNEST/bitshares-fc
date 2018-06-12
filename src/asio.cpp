@@ -125,7 +125,7 @@ namespace fc {
 
        for( uint16_t i = 0; i < this->num_io_threads; ++i )
        {
-          asio_threads.push_back( new boost::thread( [=]()
+          auto t = [=]()
                 {
                  fc::thread::current().set_name("asio");
                  
@@ -154,7 +154,9 @@ namespace fc {
                        elog("Caught unhandled exception in asio service loop");
                     }
                  }
-                }) );
+                };
+                
+          asio_threads.push_back( new boost::thread(t) ); 
        } // build thread loop
     } // end of constructor
 

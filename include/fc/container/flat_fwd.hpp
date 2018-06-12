@@ -4,6 +4,8 @@
 #include <boost/interprocess/containers/vector.hpp>
 #include <fc/config.hpp>
 
+#include <stdint.h>
+
 namespace fc {
 
    using boost::container::flat_map;
