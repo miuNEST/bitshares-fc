@@ -1,6 +1,8 @@
 #pragma once
 #include <stdint.h>
 #include <new>
+#include <vector>
+#include <algorithm>
 
 #ifdef _MSC_VER
 #pragma warning(disable: 4482) // nonstandard extension used enum Name::Val, standard in C++11
@@ -51,6 +53,14 @@ namespace fc {
   template<typename T>
   const T& min( const T& a, const T& b ) { return a < b ? a: b; }
 
+    template<typename T>
+  void deduplicate( std::vector<T>& entries ) {
+    if (entries.size() > 1) {
+      std::sort( entries.begin(), entries.end() );
+      auto itr = std::unique( entries.begin(), entries.end() );
+      entries.erase( itr, entries.end() );
+    }
+  }
 }
   // outside of namespace fc becuase of VC++ conflict with std::swap
   template<typename T>
